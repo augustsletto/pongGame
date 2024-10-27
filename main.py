@@ -1,8 +1,12 @@
 from turtle import Screen, Turtle
 from paddle import Paddle
+import random
+from ball import Ball
+import time
 
 screen = Screen()
 
+random_heading = random.randint(0,360)
 
 screen.bgcolor("black")
 screen.setup(width=800, height=600)
@@ -13,19 +17,7 @@ screen.tracer(0)
 
 r_paddle = Paddle((350, 0))   
 l_paddle = Paddle((-350, 0))
-
-
-
-#paddle = Turtle()
-
-#paddle.shape("square")
-#paddle.color("white")
-#paddle.shapesize(stretch_wid=5, stretch_len=1)
-
-#paddle.penup()
-#paddle.goto(350, 0)
-
-
+ball = Ball()
 
 
 
@@ -40,9 +32,12 @@ screen.onkey(l_paddle.go_down, "s")
 game_is_on = True
 
 while game_is_on:
+    time.sleep(0.1)
     screen.update()
+    ball.move()
     
-
+    if ball.ycor() > 280 or ball.ycor() < -280:
+        ball.bounce()
 
 
 
